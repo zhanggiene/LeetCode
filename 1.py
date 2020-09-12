@@ -3,12 +3,11 @@
 # super long 
 
 '''
+method 1
 1, sort the number list 
 2, [1,2,3,4,5]   start from the first number, use binary search to search for target -1. then if found return the number 4
 3, use linear search to search for the index of 4 in the original list. 
-
-
-
+'''
 '''
 
 def binary_search(arr, low, high, x):
@@ -46,4 +45,27 @@ class Solution:
                     return [lowerNumberIndex,nums.index(highNumber,lowerNumberIndex+1,high)]
                     
                 return [nums.index(lowerNumber),nums.index(highNumber)]
-                
+
+'''
+'''
+method 2:
+hash map allow us to find the element in constant time, so no need to loop one by one 
+'''
+
+def twoSum(nums,target):
+    numberToindex={}
+    for i in range(len(nums)):
+        if nums[i] in numberToindex:
+            numberToindex[nums[i]].append(i)
+        else:
+            numberToindex[nums[i]]=[i]
+    for i in nums:
+        if target-i in numberToindex:
+            if i == target-i:
+                if len(numberToindex[i])==2:
+                    return numberToindex[i]
+                else:
+                    continue
+        if target-i in numberToindex:
+            return [*numberToindex[i],*numberToindex[target-i]]
+print(twoSum([3,2,4],6))
